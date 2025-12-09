@@ -1,5 +1,6 @@
 from flask import Flask, request
 import requests
+import google.generativeai as genai
 
 app = Flask(__name__)
 
@@ -9,45 +10,46 @@ PAGE_ACCESS_TOKEN = "EAAL2ozvDJnsBQAJyVSkAdiXj0JfPjHPNq8KtSzBlDDLo2M3SDBje9ZAIXN
 GEMINI_API_KEY = "AIzaSyCMPylk2J1qMpyTUiUvU8ZC5Q44qGy-9Ic"
 # --------------------------------------
 
-# Your instructions for the bot
+# Configure the AI with your key
+genai.configure(api_key=GEMINI_API_KEY)
+
+# --- YOUR BOT'S PERSONALITY (The "Training") ---
+# This is where you "train" the bot. You tell it who it is and what it knows.
+# You can type as much instruction here as you want!
 SYSTEM_INSTRUCTION = """
-You are a helpful, polite customer service assistant for a shop in Myanmar.
-Answer in Burmese. If the user uses Zawgyi, reply in Unicode.
+You are a helpful, polite, and professional customer service assistant for a shop in Myanmar.
+Your goal is to answer customer questions briefly and clearly in Burmese.
+- If the user writes in Zawgyi, you understand it but reply in standard Unicode Burmese.
+- Be friendly but professional.
+- If you don't know the answer, ask them to wait for a human agent.
+
+Store Info:
+- Opening Hours: 6 AM to 6 PM.
+- Address: 41st 87stx88st, Mandalay.
+- Products: We sell rice.
 """
 
 def get_ai_response(user_text):
     """
-    DIRECT CONNECTION: Uses standard HTTP requests to bypass library version issues.
+    Sends the user's message to Gemini AI and gets a smart reply.
     """
-    url = url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key={GEMINI_API_KEY}"
-    
-    headers = {
-        "Content-Type": "application/json"
-    }
-    
-    payload = {
-        "contents": [{
-            "parts": [{
-                "text": f"{SYSTEM_INSTRUCTION}\n\nUser said: {user_text}"
-            }]
-        }]
-    }
-
     try:
-        response = requests.post(url, headers=headers, json=payload)
+        # Create the model
+        model = genai.GenerativeModel('gemini-1.5-flash')
         
-        # Check if Google gave a valid 200 OK response
-        if response.status_code == 200:
-            result = response.json()
-            # Extract the text from the complex JSON answer
-            return result['candidates'][0]['content']['parts'][0]['text']
-        else:
-            print(f"Google Error: {response.text}")
-            return "စနစ်ပိုင်းဆိုင်ရာ အမှားအယွင်းရှိနေပါသည်။ (Google API Error)"
-
+        # Combine instructions with the user's message
+        full_prompt = f"{SYSTEM_INSTRUCTION}\n\nCustomer says: {user_text}"
+        
+        # Ask the AI
+        response = model.generate_content(full_prompt)
+        
+        # Return the AI's text
+        return response.text.strip()
+        
     except Exception as e:
-        print(f"Connection Error: {e}")
-        return "ခေတ္တစောင့်ဆိုင်းပေးပါ၊ စနစ်ပိုင်းဆိုင်ရာ အနည်းငယ် နှောင့်နှေးနေပါသည်။"
+        print(f"AI Error: {e}")
+        return "ခေတ္တစောင့်ဆိုင်းပေးပါ၊ စနစ်ပိုင်းဆိုင်ရာ အနည်းငယ် နှောင့်နှေးနေပါသည်။" 
+        # (Please wait, slight system delay.)
 
 def send_message(recipient_id, text):
     """Sends the reply back to Facebook"""
@@ -78,10 +80,12 @@ def webhook_handle():
                 if messaging_event.get('message') and messaging_event['message'].get('text'):
                     sender_id = messaging_event['sender']['id']
                     user_text = messaging_event['message']['text']
+                    
+                    # Call the AI function instead of the old logic
                     reply_text = get_ai_response(user_text)
+                    
                     send_message(sender_id, reply_text)
     return "ok", 200
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
-
