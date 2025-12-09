@@ -35,7 +35,7 @@ def get_ai_response(user_text):
     """
     try:
         # Create the model
-        model = genai.GenerativeModel('gemini-1.5-flash')
+        model = genai.GenerativeModel('gemini-pro')
         
         # Combine instructions with the user's message
         full_prompt = f"{SYSTEM_INSTRUCTION}\n\nCustomer says: {user_text}"
@@ -88,4 +88,5 @@ def webhook_handle():
     return "ok", 200
 
 if __name__ == '__main__':
+
     app.run(debug=True, port=5000)
