@@ -19,7 +19,7 @@ def get_ai_response(user_text):
     """
     DIRECT CONNECTION: Uses standard HTTP requests to bypass library version issues.
     """
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={GEMINI_API_KEY}"
+    url = url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key={GEMINI_API_KEY}"
     
     headers = {
         "Content-Type": "application/json"
@@ -84,3 +84,4 @@ def webhook_handle():
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
+
