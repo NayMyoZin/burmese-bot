@@ -1,21 +1,17 @@
 from flask import Flask, request
 import requests
-import google.generativeai as genai
 
 app = Flask(__name__)
 
-# --- CONFIGURATION (FILL THESE IN!) ---
+# --- CONFIGURATION ---
+# (I have kept your keys here so it works instantly. 
+# TOMORROW: Please generate new keys for security!)
 VERIFY_TOKEN = "burmesebotsecret2025" 
 PAGE_ACCESS_TOKEN = "EAAL2ozvDJnsBQAJyVSkAdiXj0JfPjHPNq8KtSzBlDDLo2M3SDBje9ZAIXN2VYLwanY9bqiokYe3lj5wmuLhGdJ0AVSsLocKZBYQVHO4QHEsNmr7ki1zlQUWNq8WM0TlBpf6tFQibw5F51yC8GH06FXsNZByEoldhcWKDSBZB5s6koLenUeZCtkJA6JFBZCkgmyYRMMohGFVH1Bdtnd5o2GfEis"
 GEMINI_API_KEY = "AIzaSyCMPylk2J1qMpyTUiUvU8ZC5Q44qGy-9Ic"
-# --------------------------------------
+# ---------------------
 
-# Configure the AI with your key
-genai.configure(api_key=GEMINI_API_KEY)
-
-# --- YOUR BOT'S PERSONALITY (The "Training") ---
-# This is where you "train" the bot. You tell it who it is and what it knows.
-# You can type as much instruction here as you want!
+# --- YOUR RICE SHOP INSTRUCTIONS ---
 SYSTEM_INSTRUCTION = """
 You are a helpful, polite, and professional customer service assistant for a shop in Myanmar.
 Your goal is to answer customer questions briefly and clearly in Burmese.
@@ -31,25 +27,38 @@ Store Info:
 
 def get_ai_response(user_text):
     """
-    Sends the user's message to Gemini AI and gets a smart reply.
+    DIRECT CONNECTION: Bypasses the broken library.
     """
+    # We use the standard API URL directly
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={GEMINI_API_KEY}"
+    
+    headers = {
+        "Content-Type": "application/json"
+    }
+    
+    payload = {
+        "contents": [{
+            "parts": [{
+                "text": f"{SYSTEM_INSTRUCTION}\n\nCustomer says: {user_text}"
+            }]
+        }]
+    }
+
     try:
-        # Create the model
-        model = genai.GenerativeModel('gemini-1.5-flash')
+        response = requests.post(url, headers=headers, json=payload)
         
-        # Combine instructions with the user's message
-        full_prompt = f"{SYSTEM_INSTRUCTION}\n\nCustomer says: {user_text}"
-        
-        # Ask the AI
-        response = model.generate_content(full_prompt)
-        
-        # Return the AI's text
-        return response.text.strip()
-        
+        # Check if Google gave a valid 200 OK response
+        if response.status_code == 200:
+            result = response.json()
+            # Extract the text from the answer
+            return result['candidates'][0]['content']['parts'][0]['text']
+        else:
+            print(f"Google Error: {response.text}")
+            return "စနစ်ပိုင်းဆိုင်ရာ အမှားအယွင်းရှိနေပါသည်။ (Google API Error)"
+
     except Exception as e:
-        print(f"AI Error: {e}")
-        return "ခေတ္တစောင့်ဆိုင်းပေးပါ၊ စနစ်ပိုင်းဆိုင်ရာ အနည်းငယ် နှောင့်နှေးနေပါသည်။" 
-        # (Please wait, slight system delay.)
+        print(f"Connection Error: {e}")
+        return "ခေတ္တစောင့်ဆိုင်းပေးပါ၊ စနစ်ပိုင်းဆိုင်ရာ အနည်းငယ် နှောင့်နှေးနေပါသည်။"
 
 def send_message(recipient_id, text):
     """Sends the reply back to Facebook"""
@@ -80,10 +89,7 @@ def webhook_handle():
                 if messaging_event.get('message') and messaging_event['message'].get('text'):
                     sender_id = messaging_event['sender']['id']
                     user_text = messaging_event['message']['text']
-                    
-                    # Call the AI function instead of the old logic
                     reply_text = get_ai_response(user_text)
-                    
                     send_message(sender_id, reply_text)
     return "ok", 200
 
