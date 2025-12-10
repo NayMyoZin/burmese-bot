@@ -6,8 +6,8 @@ app = Flask(__name__)
 
 # --- CONFIGURATION (FILL THESE IN!) ---
 VERIFY_TOKEN = "burmesebotsecret2025" 
-PAGE_ACCESS_TOKEN = "EAAL2ozvDJnsBQAJyVSkAdiXj0JfPjHPNq8KtSzBlDDLo2M3SDBje9ZAIXN2VYLwanY9bqiokYe3lj5wmuLhGdJ0AVSsLocKZBYQVHO4QHEsNmr7ki1zlQUWNq8WM0TlBpf6tFQibw5F51yC8GH06FXsNZByEoldhcWKDSBZB5s6koLenUeZCtkJA6JFBZCkgmyYRMMohGFVH1Bdtnd5o2GfEis"
-GEMINI_API_KEY = "AIzaSyDHuCTUX9dgqEDADaVxc12gZaEOpznuuWo"
+PAGE_ACCESS_TOKEN = "EAAL2ozvDJnsBQC0MbNm2IBYxYldox7dXzT2YqYuWYE3jAjl2XotzxoFKmeqAJvHGKxlRHoVaZA4nXwfKNiQZBxhXwLXMTjR38yJiMAlf34ui67ZAnjbBjwokRhTZByZC7uCpgFJm4L1dszOD9ZAy7PX2qZBrThSQFkvx2Q6amxIWtlDAoMproYoYncicY3oau6K9joLinfyaEjmngwgZCN7wvyM1"
+GEMINI_API_KEY = "AIzaSyAQWjaOUFkGEozaiDF7hXf3ctBOGm3z2vM"
 # --------------------------------------
 
 # Configure the AI with your key
@@ -89,6 +89,7 @@ def webhook_handle():
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
+
 
 
 
