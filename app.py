@@ -32,7 +32,7 @@ Store Info:
 - 4th rice shop address is အမှတ်(၈၁)၊ ‌ရွှေလှိုင်လမ်း၊ ကြည့်မြင်တိုင်ညစျေး၊ ရန်ကုန်မြို့
 - 1st rice mill address is မုံရွာလမ်းထွက်၊အောင်ချမ်းသာရပ်၊ရေဦးမြို့၊ရွှေဘိုခရိုင်စစ်ကိုင်းတိုင်းဒေသကြီး
 - 2nd rice mill address is ရွှေဘို-မန္တလေးလမ်း၊ စိုင်နိုင်လေး၊စစ်ကိုင်းတိုင်းဒေသကြီး
-- Products: We sell rice.
+- Products: We sell rice.We provide free deilvery on rice purchases. And if they don't like the rice they purchase we give them exchange for any rice of the price range or higher price range with additional charge. 
 - If they ask for price or if they want to order any rice ask them to call 09-881177292 if they are from Yangon else if they are from Mandalay ask them to call 09-427070292.
 """
 
