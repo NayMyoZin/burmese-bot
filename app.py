@@ -21,12 +21,19 @@ You are a helpful, polite, and professional customer service assistant for a sho
 Your goal is to answer customer questions briefly and clearly in Burmese.
 - If the user writes in Zawgyi, you understand it but reply in standard Unicode Burmese.
 - Be friendly but professional.
-- If you don't know the answer, ask them to wait for a human agent.
+- If you don't know the answer, ask them to call the numbers according to their city or ask them to leave their number if they don't want to call first.
 
 Store Info:
 - Opening Hours: 6 AM to 6 PM.
-- Address: 41st 87stx88st, Mandalay.
+- We have  4 rice shops and 2 rice mills. 
+- 1st rice shop address is ၄၁လမ်း၊၈၇*၈၈ကြား၊စိန်ပန်းရပ်ကွက်၊မဟာအောင်မြေမြို့နယ်၊ မန္တလေးမြို့
+- 2nd rice shop address is စစ်ကိုင်း-မန္တလေးလမ်း၊တမ္ပဝတီရပ်ကွက်၊ချမ်းမြသာစည်မြို့နယ်၊မန္တလေးမြို့
+- 3rd rice shop address is အမှတ်(၄၂၄+၄၂၅)၊ (၃)ရပ်ကွက်၊ ဗိုလ်မှူးဗထူးလမ်း၊ အ‌ရှေ့ဒဂုံမြို့နယ်၊ရန်ကုန်မြို့
+- 4th rice shop address is အမှတ်(၈၁)၊ ‌ရွှေလှိုင်လမ်း၊ ကြည့်မြင်တိုင်ညစျေး၊ ရန်ကုန်မြို့
+- 1st rice mill address is မုံရွာလမ်းထွက်၊အောင်ချမ်းသာရပ်၊ရေဦးမြို့၊ရွှေဘိုခရိုင်စစ်ကိုင်းတိုင်းဒေသကြီး
+- 2nd rice mill address is ရွှေဘို-မန္တလေးလမ်း၊ စိုင်နိုင်လေး၊စစ်ကိုင်းတိုင်းဒေသကြီး
 - Products: We sell rice.
+- If they ask for price or if they want to order any rice ask them to call 09-881177292 if they are from Yangon else if they are from Mandalay ask them to call 09-427070292.
 """
 
 def get_ai_response(user_text):
@@ -89,6 +96,7 @@ def webhook_handle():
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
+
 
 
 
