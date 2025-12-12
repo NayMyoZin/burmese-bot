@@ -7,7 +7,7 @@ app = Flask(__name__)
 # --- CONFIGURATION (FILL THESE IN!) ---
 VERIFY_TOKEN = "burmesebotsecret2025" 
 PAGE_ACCESS_TOKEN = "EAAL2ozvDJnsBQAcTzMhYZAL4bhKt0IqExEfhwdiKBGmdICZAfEfsaHjpkOYgMo1AKZCJyLl0ZCwhaAF9MZCV1hI8W4JGZBGeNGZAepOpuKK5fGpdael1KX8XOFSg8GXeGiTU7wEZAuXoZALB5Nest0o291qijo7NLzIRoCHNIy9qLxcev011ciYOkU5RPu702V3ANOsucAmPv8i9qGnC0XMx0sGJ5"
-GEMINI_API_KEY = "AIzaSyDxGN0IUQCVPR2giSbDcZIP57rmJK2AMls"
+GEMINI_API_KEY = "AIzaSyDxKjta_j1-2i_bJ3StsEU_oJ6nd3Oz7Sk"
 # --------------------------------------
 
 # Configure the AI with your key
@@ -89,6 +89,7 @@ def webhook_handle():
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
+
 
 
 
