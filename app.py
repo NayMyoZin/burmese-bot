@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 # --- CONFIGURATION (FILL THESE IN!) ---
 VERIFY_TOKEN = "burmesebotsecret2025" 
-PAGE_ACCESS_TOKEN = "EAAL2ozvDJnsBQC0MbNm2IBYxYldox7dXzT2YqYuWYE3jAjl2XotzxoFKmeqAJvHGKxlRHoVaZA4nXwfKNiQZBxhXwLXMTjR38yJiMAlf34ui67ZAnjbBjwokRhTZByZC7uCpgFJm4L1dszOD9ZAy7PX2qZBrThSQFkvx2Q6amxIWtlDAoMproYoYncicY3oau6K9joLinfyaEjmngwgZCN7wvyM1"
+PAGE_ACCESS_TOKEN = "EAAL2ozvDJnsBQAcTzMhYZAL4bhKt0IqExEfhwdiKBGmdICZAfEfsaHjpkOYgMo1AKZCJyLl0ZCwhaAF9MZCV1hI8W4JGZBGeNGZAepOpuKK5fGpdael1KX8XOFSg8GXeGiTU7wEZAuXoZALB5Nest0o291qijo7NLzIRoCHNIy9qLxcev011ciYOkU5RPu702V3ANOsucAmPv8i9qGnC0XMx0sGJ5"
 GEMINI_API_KEY = "AIzaSyDxGN0IUQCVPR2giSbDcZIP57rmJK2AMls"
 # --------------------------------------
 
@@ -89,6 +89,7 @@ def webhook_handle():
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
+
 
 
 
