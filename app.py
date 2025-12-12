@@ -5,9 +5,9 @@ import google.generativeai as genai
 app = Flask(__name__)
 
 # --- CONFIGURATION (FILL THESE IN!) ---
-VERIFY_TOKEN = "" 
-PAGE_ACCESS_TOKEN = ""
-GEMINI_API_KEY = ""
+VERIFY_TOKEN = "burmesebotsecret2025" 
+PAGE_ACCESS_TOKEN = "EAAL2ozvDJnsBQFcxhz4fVg6MoSka7mRMcohMy5XxvEPZAHPA3P9sTbpOQM1ZCo99BG1USSL7lkgCE6ZCNCQrZBl7Gw9EJsRyfwBKQNxL436Wu3KQxOFZBTBYHOaucmkUYMDicBXR2V10uNZC2uVdBFLNHfV4VcRJnGEgvbxWwuESka9q4uyGxmweNZC2ZBfFqEiJvpIXNgw5rO5A0QiAZC7Bg3tvI"
+GEMINI_API_KEY = "AIzaSyCSdqA8Zdw1WD7uz2L0YKTqgE9QulrOz60"
 # --------------------------------------
 
 # Configure the AI with your key
@@ -89,6 +89,7 @@ def webhook_handle():
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
+
 
 
 
